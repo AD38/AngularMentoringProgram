@@ -1,2 +1,17 @@
-<p>header works!</p>
-<app-logo></app-logo>
+<header>
+    <mat-toolbar class="header" color="primary">
+        <div class="logo">
+            <app-logo></app-logo>
+        </div>
+        
+        <span class="spacer"></span>
+        <div class="user-panel">
+            <button color="primary" mat-flat-button>
+                <mat-icon>perm_identity</mat-icon> <span>User login</span>
+            </button>
+            <button color="primary" mat-flat-button>
+                <mat-icon>exit_to_app</mat-icon>Log off
+            </button>
+        </div>   
+    </mat-toolbar>
+</header>

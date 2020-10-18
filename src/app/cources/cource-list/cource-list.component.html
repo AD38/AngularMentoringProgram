@@ -1,4 +1,2 @@
-<p>cource-list works!</p>
-<app-cource-item></app-cource-item>
-<app-cource-item></app-cource-item>
-<app-cource-item></app-cource-item>
+<app-cource-item (onDelete)="onCourceDelete($event)" *ngFor="let courceItem of courceItems" [courceItem]="courceItem"></app-cource-item>
+<button class="load-more-button" mat-raised-button (click)="loadMore()">Load more</button>
