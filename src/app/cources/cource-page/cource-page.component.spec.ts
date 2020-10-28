@@ -1,4 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from 'src/app/core/core.module';
+import { FooterComponent } from 'src/app/core/footer/footer.component';
+import { HeaderComponent } from 'src/app/core/header/header.component';
+import { CourceItemComponent } from '../cource-item/cource-item.component';
+import { CourceListComponent } from '../cource-list/cource-list.component';
+import { SectionComponent } from '../section/section.component';
 
 import { CourcePageComponent } from './cource-page.component';
 
@@ -8,7 +20,14 @@ describe('CourcePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourcePageComponent ]
+      declarations: [ CourcePageComponent, CourceItemComponent, CourceListComponent, SectionComponent ],
+      imports: [ CoreModule, 
+        NoopAnimationsModule,
+        FormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatInputModule ]
     })
     .compileComponents();
   });

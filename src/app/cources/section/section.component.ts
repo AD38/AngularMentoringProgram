@@ -19,5 +19,6 @@ export class SectionComponent implements OnInit {
   }
 
   public addCource() {
+    console.log('add cource');
   }
 }

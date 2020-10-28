@@ -22,5 +22,6 @@ export class CourceItemComponent implements OnInit {
   }
   
   public edit(){
+    console.log("edit cource item");
   }
 }
