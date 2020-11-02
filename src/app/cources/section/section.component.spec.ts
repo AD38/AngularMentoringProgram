@@ -48,21 +48,6 @@ describe('SectionComponent', () => {
     expect(component.searchText).toEqual('updated text');
   });
 
-  it('should call console.log on search', () => {
-    component.searchText = 'text';
-    fixture.detectChanges();
-    let input = fixture.debugElement.query(By.css('.section-container input')).nativeElement;
-
-    expect(component.searchText).toEqual('text');
-
-    input.value = 'updated text';
-    input.dispatchEvent(new Event('input'));
-
-    spyOn(console, "log");
-    fixture.debugElement.query(By.css('.search-button')).triggerEventHandler('click', null);
-
-    expect(console.log).toHaveBeenCalledWith("updated text");
-  });
 
   it('should call console.log on add cource', () => {
     spyOn(console, "log");

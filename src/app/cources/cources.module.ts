@@ -12,9 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule}  from '@angular/material/input';
+import { CourceBorderHighlightDirective } from './directives/cource-border-highlight.directive';
+import { FilterPipe } from './pipes/filter.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
-  declarations: [CourcePageComponent, CourceItemComponent, SectionComponent, CourceListComponent],
+  declarations: [CourcePageComponent, CourceItemComponent, SectionComponent, CourceListComponent, CourceBorderHighlightDirective, FilterPipe, OrderByPipe],
   exports: [CourcePageComponent],
   imports: [
     CommonModule,

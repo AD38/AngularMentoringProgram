@@ -1,15 +1,22 @@
-<mat-card class="cource-item">
+<mat-card ngClass="cource-item" [appCourceBorderHighlight]="courceItem.creationDate">
     <mat-card-header>
-        <mat-card-title class="cource-title">{{courceItem.title}}</mat-card-title>
-        <mat-card-subtitle class="cource-subtitle">
-            <div class="cource-additional-infomation">
-                <div class="icon-text">
+        <mat-card-title ngClass="cource-title">
+            <div ngClass="icon-text">
+                <span>{{courceItem.title | uppercase}}</span>
+                <mat-icon [ngStyle]="{'color': '#ffeb3b'}" *ngIf="courceItem.isTopRated">star</mat-icon>
+            </div>
+        </mat-card-title>
+        <mat-card-subtitle ngClass="cource-subtitle">
+            <div ngClass="cource-additional-infomation">
+                <div ngClass="icon-text">
                     <mat-icon>access_time</mat-icon>
-                    <span>{{courceItem.duration * 60000 | date:'H\'h\' m\'min\'':'UTC'}}</span>
+                    <span>{{courceItem.duration < 60 
+                        ? (courceItem.duration * 60000 | date: 'm\'min\'':'UTC') 
+                        : (courceItem.duration * 60000 | date:'H\'h\' m\'min\'':'UTC')}}</span>
                 </div>
             </div>
-            <div class="cource-additional-infomation">
-                <div class="icon-text">
+            <div ngClass="cource-additional-infomation">
+                <div ngClass="icon-text">
                     <mat-icon>calendar_today</mat-icon>
                     <span>{{courceItem.creationDate | date :'d MMM, yyyy'}}</span>
                 </div>

@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { CourceBorderHighlightDirective } from '../directives/cource-border-highlight.directive';
 
 describe('CourceItemComponent', () => {
   let component: CourceItemComponent;
@@ -14,7 +15,7 @@ describe('CourceItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourceItemComponent ],
+      declarations: [ CourceItemComponent, CourceBorderHighlightDirective ],
       imports: [ FormsModule,
         MatButtonModule,
         MatCardModule,
@@ -39,21 +40,22 @@ describe('CourceItemComponent', () => {
       description: "description",
       duration: 125,
       id: 1,
-      title: "title"
+      title: "title",
+      isTopRated: false
     }
     
     fixture.detectChanges();
-
-    let title = fixture.debugElement.query(By.css('.cource-title')).nativeElement.textContent;
-    expect(title).toBe("title");
+    console.log(fixture.debugElement.query(By.css('.cource-title')).nativeElement)
+    let title = fixture.debugElement.query(By.css('.cource-title .icon-text span')).nativeElement.textContent;
+    expect(title).toBe("TITLE");
 
     let description = fixture.debugElement.query(By.css('mat-card-content')).nativeElement.textContent;
     expect(description).toBe("description");   
 
-    let duration = fixture.debugElement.queryAll(By.css('.icon-text span'))[0].nativeElement.textContent;
+    let duration = fixture.debugElement.queryAll(By.css('.cource-subtitle .icon-text span'))[0].nativeElement.textContent;
     expect(duration).toBe("2h 5min");
 
-    let creationDate = fixture.debugElement.queryAll(By.css('.icon-text span'))[1].nativeElement.textContent;
+    let creationDate = fixture.debugElement.queryAll(By.css('.cource-subtitle .icon-text span'))[1].nativeElement.textContent;
     expect(creationDate).toBe("11 Nov, 2020");
   });
 
@@ -63,7 +65,8 @@ describe('CourceItemComponent', () => {
       description: "description",
       duration: 125,
       id: 12,
-      title: "title"
+      title: "title",
+      isTopRated: false
     }
 
     let id: number;

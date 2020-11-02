@@ -10,6 +10,9 @@ import { FooterComponent } from 'src/app/core/footer/footer.component';
 import { HeaderComponent } from 'src/app/core/header/header.component';
 import { CourceItemComponent } from '../cource-item/cource-item.component';
 import { CourceListComponent } from '../cource-list/cource-list.component';
+import { CourceBorderHighlightDirective } from '../directives/cource-border-highlight.directive';
+import { FilterPipe } from '../pipes/filter.pipe';
+import { OrderByPipe } from '../pipes/order-by.pipe';
 import { SectionComponent } from '../section/section.component';
 
 import { CourcePageComponent } from './cource-page.component';
@@ -20,7 +23,7 @@ describe('CourcePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourcePageComponent, CourceItemComponent, CourceListComponent, SectionComponent ],
+      declarations: [ CourcePageComponent, CourceItemComponent, CourceListComponent, SectionComponent, FilterPipe, OrderByPipe, CourceBorderHighlightDirective ],
       imports: [ CoreModule, 
         NoopAnimationsModule,
         FormsModule,
