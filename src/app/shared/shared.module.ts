@@ -18,4 +18,4 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ]
 })
-export class CoreModule { }
+export class SharedModule { }

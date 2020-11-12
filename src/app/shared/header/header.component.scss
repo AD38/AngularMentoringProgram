@@ -1,16 +1,16 @@
 .header{
     padding: 0px;
-
-    .spacer {
-        flex: 1 1 auto;
-    }
+    height: 60px;
+    display: flex;
+    
     
     .user-panel {
-        margin-right: 30px;
+        margin-right: 10%;
         font-size: 12px;
     }
     
     .logo {
+        flex: 1;
         margin-left: 10%;
     }
 }

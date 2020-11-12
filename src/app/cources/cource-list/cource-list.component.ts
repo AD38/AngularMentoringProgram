@@ -1,56 +1,40 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ICource } from '../models/icource';
+import { FilterPipe } from '../pipes/filter.pipe';
+import { CourceService } from '../services/cource.service';
 
 @Component({
   selector: 'app-cource-list',
   templateUrl: './cource-list.component.html',
-  styleUrls: ['./cource-list.component.scss']
+  styleUrls: ['./cource-list.component.scss'],
+  providers: [FilterPipe]
 })
 export class CourceListComponent implements OnInit {
-  @Input() public courceItems: ICource[];
-  public filteredItems: ICource[];
+  public courceItems: ICource[];
 
-  constructor() { }
+  private searchText: string;
+
+  constructor(private courceService: CourceService, private filterPipe: FilterPipe) { }
 
   ngOnInit(): void {
-    this.courceItems = [
-      {
-        id: 1,
-        title: 'First Item',
-        duration: 88,
-        creationDate: new Date(2020, 9, 20),
-        description: 'Item decription',
-        isTopRated: false
-      },
-      {
-        id: 2,
-        title: 'Second Item',
-        duration: 129,
-        creationDate: new Date(2020, 12, 13),
-        description: 'Item decription',
-        isTopRated: false
-      },
-      {
-        id: 3,
-        title: 'Third Item',
-        duration: 43,
-        creationDate: new Date(2020, 4, 9),
-        description: 'Item decription',
-        isTopRated: true
-      }
-    ];
-    this.filteredItems = [...this.courceItems];
+    this.courceItems = this.courceService.get();
   }
 
   public onCourceDelete(id: number) {
-    console.log(id);
+    if(window.confirm('Do ypu really want to delete this cource?')){
+      this.courceService.delete(id);
+      this.courceItems = this.courceService.get();
+      this.courceItems = this.filterPipe.transform(this.courceItems, this.searchText);
+    } 
   }
 
   public loadMore() {
     console.log('load more');
   }
 
-  public onSearch(filteredItems: ICource[]) {
-    this.filteredItems = filteredItems;
+  public onSearch(searchText: string) {
+    this.searchText = searchText;
+    this.courceItems = this.courceService.get();
+    this.courceItems = this.filterPipe.transform(this.courceItems, searchText);
   }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CourcePageComponent } from './cource-page/cource-page.component';
 import { CourceItemComponent } from './cource-item/cource-item.component';
 
-import { CoreModule } from '../core/core.module';
 import { SectionComponent } from './section/section.component';
 import { CourceListComponent } from './cource-list/cource-list.component';
 import { FormsModule } from '@angular/forms';
@@ -15,13 +14,14 @@ import { MatInputModule}  from '@angular/material/input';
 import { CourceBorderHighlightDirective } from './directives/cource-border-highlight.directive';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [CourcePageComponent, CourceItemComponent, SectionComponent, CourceListComponent, CourceBorderHighlightDirective, FilterPipe, OrderByPipe],
   exports: [CourcePageComponent],
   imports: [
     CommonModule,
-    CoreModule,
+    SharedModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
