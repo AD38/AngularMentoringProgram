@@ -1,6 +1,6 @@
 import { ICource } from "./icource";
 
-class Cource implements ICource {
+export class Cource implements ICource {
     id: number;
     title: string;
     creationDate: Date;

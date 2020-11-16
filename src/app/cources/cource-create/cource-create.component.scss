@@ -1,0 +1,23 @@
+.cource-create {
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cource-create-content {
+        width: 70%;
+
+        mat-card-content {
+            display: flex;
+            flex-direction: column;
+
+            .width-30 {
+                width: 30%;             
+            }
+        }
+
+        .cource-create-duration span{
+            margin-left: 20px;
+        }
+    }
+}

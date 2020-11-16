@@ -1,6 +1,7 @@
 <app-section (onSearch)="onSearch($event)"></app-section>
 <div *ngIf="courceItems.length > 0; else noItemsMessage">
-    <app-cource-item (onDelete)="onCourceDelete($event)" *ngFor="let courceItem of courceItems | orderBy" [courceItem]="courceItem"></app-cource-item>
+    <app-cource-item (onDelete)="onCourceDelete($event)"   (onEdit)="onCourceEdit($event)"
+        *ngFor="let courceItem of courceItems | orderBy" [courceItem]="courceItem"></app-cource-item>
     <button class="load-more-button" mat-raised-button (click)="loadMore()">Load more</button>
 </div>
 <ng-template #noItemsMessage>

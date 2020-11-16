@@ -20,7 +20,7 @@ export class CourceListComponent implements OnInit {
     this.courceItems = this.courceService.get();
   }
 
-  public onCourceDelete(id: number) {
+  public onCourceDelete(id: number): void {
     if(window.confirm('Do ypu really want to delete this cource?')){
       this.courceService.delete(id);
       this.courceItems = this.courceService.get();
@@ -28,11 +28,15 @@ export class CourceListComponent implements OnInit {
     } 
   }
 
-  public loadMore() {
+  public onCourceEdit(id: number): void {
+
+  }
+
+  public loadMore(): void {
     console.log('load more');
   }
 
-  public onSearch(searchText: string) {
+  public onSearch(searchText: string): void {
     this.searchText = searchText;
     this.courceItems = this.courceService.get();
     this.courceItems = this.filterPipe.transform(this.courceItems, searchText);
