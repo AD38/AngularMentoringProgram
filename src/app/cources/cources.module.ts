@@ -15,11 +15,12 @@ import { CourceBorderHighlightDirective } from './directives/cource-border-highl
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SharedModule } from '../shared/shared.module';
-import { CourceCreateComponent } from './cource-create/cource-create.component';
+import { CourceModifyComponent } from './cource-modify/cource-modify.component';
 import { RouterModule } from '@angular/router';
+import { CourcesRoutingModule } from './cources-routing.module';
 
 @NgModule({
-  declarations: [CourcePageComponent, CourceItemComponent, SectionComponent, CourceListComponent, CourceBorderHighlightDirective, FilterPipe, OrderByPipe, CourceCreateComponent],
+  declarations: [CourcePageComponent, CourceItemComponent, SectionComponent, CourceListComponent, CourceBorderHighlightDirective, FilterPipe, OrderByPipe, CourceModifyComponent],
   exports: [CourcePageComponent],
   imports: [
     CommonModule,
@@ -29,7 +30,8 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     MatIconModule,
     MatInputModule,
-    RouterModule
+    RouterModule,
+    CourcesRoutingModule
   ]
 })
 export class CourcesModule { }

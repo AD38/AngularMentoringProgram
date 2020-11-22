@@ -47,6 +47,9 @@ export class CourceService {
   }
 
   public add(cource: ICource): void {
+    const ids = this.courcesItems.map(user => user.id);
+    let maxId = ids.sort((a, b) => b - a)[0];
+    cource.id = ++maxId;
     this.courcesItems.push(cource);
   }
 
@@ -56,7 +59,7 @@ export class CourceService {
       throw new Error('invalid Id')
     }
 
-    this.courcesItems[existingCource.id] = cource;
+    existingCource = cource;
   }
 
   public delete(id: number): void {

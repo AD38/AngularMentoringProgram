@@ -1,0 +1,14 @@
+@import '../../../styles.scss';
+
+.page-not-found{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: mat-color($my-app-primary);
+
+    h1 {
+        font-size: 128px;
+        color: white;
+    }
+}

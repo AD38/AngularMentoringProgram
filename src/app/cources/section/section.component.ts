@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICource } from '../models/icource';
 
 @Component({
@@ -13,7 +14,7 @@ export class SectionComponent implements OnInit {
 
   public searchText: string = '';
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,6 @@ export class SectionComponent implements OnInit {
   }
 
   public addCource() {
-    console.log('add cource');
+    this.router.navigate(['new'], { relativeTo: this.route })
   }
 }

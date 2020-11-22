@@ -7,10 +7,11 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LogoComponent, BreadcrumbComponent],
-  exports: [HeaderComponent, FooterComponent, BreadcrumbComponent],
+  declarations: [HeaderComponent, FooterComponent, LogoComponent, BreadcrumbComponent, PageNotFoundComponent],
+  exports: [HeaderComponent, FooterComponent, BreadcrumbComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     MatToolbarModule,

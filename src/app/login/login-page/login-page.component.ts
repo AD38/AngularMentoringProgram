@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth/auth.service';
+
 
 @Component({
   selector: 'app-login-page',
@@ -10,12 +12,14 @@ export class LoginPageComponent implements OnInit {
   @Input() email: string;
   @Input() password: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   public login() {
     this.authService.login(this.email, this.password);
+
+    this.router.navigate(["cources"])
   }
 }

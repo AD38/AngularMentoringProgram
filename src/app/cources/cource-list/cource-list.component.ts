@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICource } from '../models/icource';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { CourceService } from '../services/cource.service';
@@ -14,7 +15,10 @@ export class CourceListComponent implements OnInit {
 
   private searchText: string;
 
-  constructor(private courceService: CourceService, private filterPipe: FilterPipe) { }
+  constructor(private courceService: CourceService, 
+    private filterPipe: FilterPipe,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.courceItems = this.courceService.get();
@@ -29,7 +33,7 @@ export class CourceListComponent implements OnInit {
   }
 
   public onCourceEdit(id: number): void {
-
+    this.router.navigate(['./', id], { relativeTo: this.route })
   }
 
   public loadMore(): void {
