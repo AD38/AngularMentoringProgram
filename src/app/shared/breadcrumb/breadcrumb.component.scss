@@ -1,7 +1,15 @@
 .breadcrumb-container {
     height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0px 10%;
 
     .breadcrumb {
-        padding: 20px 10%;
+        a {
+            text-decoration: none;
+        }
+        a:visited {
+            color: black;
+        }
     }
 }

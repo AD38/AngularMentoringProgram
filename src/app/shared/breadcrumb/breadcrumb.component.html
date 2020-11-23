@@ -1,6 +1,7 @@
 <div class="breadcrumb-container">
     <div class="breadcrumb">
-        Cources
+        <a [routerLink]="['../']">Cources</a>
+        <span *ngIf="isModifyCourcePage" mat-button> / {{ courceName }}</span>           
     </div>
 </div>
 

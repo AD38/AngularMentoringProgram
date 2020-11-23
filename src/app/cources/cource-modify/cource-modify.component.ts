@@ -15,7 +15,7 @@ export class CourceModifyComponent implements OnInit {
   public isNew: boolean;
 
   private id: number;
-  
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private courceService: CourceService) { }
@@ -30,11 +30,11 @@ export class CourceModifyComponent implements OnInit {
         this.cource = new Cource();
         this.isNew = true;
       }
-    });  
+    });
   }
 
-  public save() { 
-    if(this.isNew) {
+  public save() {
+    if (this.isNew) {
       this.courceService.add(this.cource);
     }
     else {
