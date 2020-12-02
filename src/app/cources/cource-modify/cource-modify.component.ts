@@ -10,30 +10,29 @@ import { CourceService } from '../services/cource.service';
   styleUrls: ['./cource-modify.component.scss']
 })
 export class CourceModifyComponent implements OnInit {
-
-  public cource: ICource;
+  public cource: ICource = new Cource();
   public isNew: boolean;
 
   private id: number;
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
-    private courceService: CourceService) { }
+              private route: ActivatedRoute,
+              private courceService: CourceService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.id = +params.id
+      this.id = +params.id;
       if (this.id) {
-        this.cource = this.courceService.getById(this.id);
+        this.courceService.getById(this.id).subscribe(cource => this.cource = cource);
+        this.isNew = false;
       }
       else {
-        this.cource = new Cource();
         this.isNew = true;
       }
     });
   }
 
-  public save() {
+  public save(): void {
     if (this.isNew) {
       this.courceService.add(this.cource);
     }
@@ -44,7 +43,7 @@ export class CourceModifyComponent implements OnInit {
     this.router.navigate(['../']);
   }
 
-  public cancel() {
-    this.router.navigate(['../'])
+  public cancel(): void {
+    this.router.navigate(['../']);
   }
 }

@@ -14,8 +14,8 @@ export class BreadcrumbComponent implements OnInit {
   public isModifyCourcePage: boolean;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private courceService: CourceService) { }
+              private router: Router,
+              private courceService: CourceService) { }
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -24,7 +24,7 @@ export class BreadcrumbComponent implements OnInit {
       const courceId = +this.route.snapshot.firstChild.params.id as number;
       if (courceId) {
         this.isModifyCourcePage = true;
-        this.courceName = this.courceService.getById(courceId).title;
+        this.courceService.getById(courceId).subscribe(item => this.courceName = item.title);
       }
       else {
         this.isModifyCourcePage = false;

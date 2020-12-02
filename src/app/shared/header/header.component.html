@@ -7,7 +7,7 @@
         <span class="spacer"></span>
         <div *ngIf="isAuthentificated" class="user-panel">
             <button color="primary" mat-flat-button>
-                <mat-icon>perm_identity</mat-icon> <span>{{email}}</span>
+                <mat-icon>perm_identity</mat-icon> <span>{{(userInfo | async)?.login}}</span>
             </button>
             <button (click)="logout()" color="primary" mat-flat-button>
                 <mat-icon>exit_to_app</mat-icon>Log off

@@ -17,9 +17,8 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public login() {
-    this.authService.login(this.email, this.password);
-
-    this.router.navigate(["cources"])
+  public login(): void {
+    this.authService.login(this.email, this.password)
+      .subscribe({ next: data => this.router.navigate(['cources']) });
   }
 }

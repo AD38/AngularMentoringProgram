@@ -1,28 +1,40 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { IToken } from '../models/itoken';
+import { IUser } from '../models/iuser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public login(email: string, password: string): void {
-    let fakeToken = "wY05SFGzvWP6az1P";
-    localStorage.setItem('userInfo', JSON.stringify({ token: fakeToken, email: email }));
+  public login(email: string, password: string): Observable<IToken> {
+    const login = {
+      login: email,
+      password
+    };
+
+    return this.http.post<IToken>('http://localhost:3004/auth/login', login)
+      .pipe(map(token => {
+        localStorage.setItem('token', token.token);
+
+        return { token: token.token };
+      }));
   }
 
   public logout(): void {
-    localStorage.removeItem('userInfo');
+    localStorage.removeItem('token');
   }
 
-  public getUserInfo() {
-    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    return userInfo.email;
+  public getUserInfo(): Observable<IUser> {
+    return this.http.post<IUser>('http://localhost:3004/auth/userinfo', {});
   }
 
   public get isAuthentificated(): boolean {
-    return JSON.parse(localStorage.getItem('userInfo'));
-  } 
-
+    return localStorage.getItem('token') !== null;
+  }
 }

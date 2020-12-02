@@ -20,7 +20,16 @@ import { RouterModule } from '@angular/router';
 import { CourcesRoutingModule } from './cources-routing.module';
 
 @NgModule({
-  declarations: [CourcePageComponent, CourceItemComponent, SectionComponent, CourceListComponent, CourceBorderHighlightDirective, FilterPipe, OrderByPipe, CourceModifyComponent],
+  declarations: [
+    CourcePageComponent,
+    CourceItemComponent,
+    SectionComponent,
+    CourceListComponent,
+    CourceBorderHighlightDirective,
+    FilterPipe,
+    OrderByPipe,
+    CourceModifyComponent
+  ],
   exports: [CourcePageComponent],
   imports: [
     CommonModule,

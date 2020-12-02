@@ -1,5 +1,10 @@
 class User implements IUser {
     id: number;
-    firstName: string;
-    lastName: string;
+    token: string;
+    name: {
+        firstName: string,
+        lastName: string
+    };
+    login: string;
+    password: string;
 }
