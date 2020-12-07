@@ -1,10 +1,8 @@
 <div class="section-container">
     <mat-form-field>
         <mat-icon matPrefix>search</mat-icon>
-        <input matInput placeholder="Text to search" type="text" [(ngModel)]="searchText">
+        <input matInput placeholder="Text to search" (keyup)="search()" type="text" [(ngModel)]="searchText">
     </mat-form-field>
-    
-    <button class="search-button" mat-flat-button (click)="search()">Search</button>
 
     <div class="add-cource-container">
         <button mat-flat-button color="accent" (click)="addCource()"><mat-icon>add</mat-icon>Add cource</button>

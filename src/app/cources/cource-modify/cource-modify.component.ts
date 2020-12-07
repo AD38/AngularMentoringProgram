@@ -23,7 +23,9 @@ export class CourceModifyComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.id = +params.id;
       if (this.id) {
-        this.courceService.getById(this.id).subscribe(cource => this.cource = cource);
+        this.courceService
+          .getById(this.id)
+          .subscribe(cource => this.cource = cource);
         this.isNew = false;
       }
       else {
@@ -34,13 +36,15 @@ export class CourceModifyComponent implements OnInit {
 
   public save(): void {
     if (this.isNew) {
-      this.courceService.add(this.cource);
+      this.courceService
+        .add(this.cource)
+        .subscribe(o => this.router.navigate(['../']));
     }
     else {
-      this.courceService.update(this.cource);
+      this.courceService
+        .update(this.cource)
+        .subscribe(o => this.router.navigate(['../']));;
     }
-
-    this.router.navigate(['../']);
   }
 
   public cancel(): void {

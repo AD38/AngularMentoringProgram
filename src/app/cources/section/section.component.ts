@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICource } from '../models/icource';
 
 @Component({
   selector: 'app-section',
@@ -8,8 +7,6 @@ import { ICource } from '../models/icource';
   styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent implements OnInit {
-
-  @Input() courceItems: ICource[];
   @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
 
   public searchText: string = '';
@@ -19,11 +16,11 @@ export class SectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public search() {
+  public search(): void {
     this.onSearch.emit(this.searchText);
   }
 
-  public addCource() {
-    this.router.navigate(['new'], { relativeTo: this.route })
+  public addCource(): void {
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 }

@@ -11,13 +11,13 @@ import { IUser } from 'src/app/core/models/iuser';
 })
 export class HeaderComponent implements OnInit {
   public isAuthentificated: boolean;
-  public userInfo: Observable<IUser>;
+  public userInfo$: Observable<IUser>;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.isAuthentificated = this.authService.isAuthentificated;
-    this.userInfo = this.authService.getUserInfo();
+    this.userInfo$ = this.authService.getUserInfo();
   }
 
   public logout(): void {

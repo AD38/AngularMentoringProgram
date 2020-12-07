@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { IToken } from 'src/app/core/models/itoken';
 
 
 @Component({
@@ -19,6 +20,6 @@ export class LoginPageComponent implements OnInit {
 
   public login(): void {
     this.authService.login(this.email, this.password)
-      .subscribe({ next: data => this.router.navigate(['cources']) });
+      .subscribe((token: IToken) => this.router.navigate(['cources']));
   }
 }

@@ -1,11 +1,13 @@
 <app-section (onSearch)="onSearch($event)"></app-section>
-<div *ngIf="courceItems.length > 0; else noItemsMessage">
-    <app-cource-item (onDelete)="onCourceDelete($event)"   (onEdit)="onCourceEdit($event)"
-        *ngFor="let courceItem of courceItems" [courceItem]="courceItem"></app-cource-item>
-    <button class="load-more-button" mat-raised-button (click)="loadMore()">Load more</button>
-</div>
-<ng-template #noItemsMessage>
-    <div class="no-data-message">
-        No data. Feel free to add new cource
+<ng-container *ngIf="courceItems$ | async as courceItems">
+    <div *ngIf="courceItems.length > 0; else noItemsMessage">
+        <app-cource-item (onDelete)="onCourceDelete($event)"   (onEdit)="onCourceEdit($event)"
+            *ngFor="let courceItem of courceItems" [courceItem]="courceItem"></app-cource-item>
+        <button class="load-more-button" mat-raised-button (click)="loadMore()">Load more</button>
     </div>
-</ng-template>
+    <ng-template #noItemsMessage>
+        <div class="no-data-message">
+            No data. Feel free to add new cource
+        </div>
+    </ng-template>
+</ng-container>
