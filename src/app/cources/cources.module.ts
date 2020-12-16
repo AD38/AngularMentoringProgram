@@ -18,6 +18,10 @@ import { SharedModule } from '../shared/shared.module';
 import { CourceModifyComponent } from './cource-modify/cource-modify.component';
 import { RouterModule } from '@angular/router';
 import { CourcesRoutingModule } from './cources-routing.module';
+import { StoreModule } from '@ngrx/store';
+import * as fromCources from './store/reducers/cources.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CourcesEffects } from './store/cources.effects';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { CourcesRoutingModule } from './cources-routing.module';
     MatIconModule,
     MatInputModule,
     RouterModule,
-    CourcesRoutingModule
+    CourcesRoutingModule,
+    StoreModule.forFeature(fromCources.courcesFeatureKey, fromCources.reducer),
+    EffectsModule.forFeature([CourcesEffects])
   ]
 })
 export class CourcesModule { }

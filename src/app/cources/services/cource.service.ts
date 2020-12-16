@@ -26,10 +26,11 @@ export class CourceService {
       .pipe(map(cource => this.mapCourceBEToCource(cource[0])));
   }
 
-  public add(cource: ICource): Observable<any> {
+  public add(cource: ICource): Observable<ICource> {
     const courceBE: ICourceBE = this.mapCourceToCourceBE(cource);
 
-    return this.http.post(this.url, courceBE);
+    return this.http.post<ICourceBE>(this.url, courceBE)
+      .pipe(map(cource => this.mapCourceBEToCource(cource)));
   }
 
   public update(cource: ICource): Observable<ICource> {

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { IUser } from 'src/app/core/models/iuser';
+import { selectUserInfo } from 'src/app/core/store/auth.selectors';
+import * as AuthActions from '../../core/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +14,13 @@ import { IUser } from 'src/app/core/models/iuser';
 })
 export class HeaderComponent implements OnInit {
   public isAuthentificated: boolean;
-  public userInfo$: Observable<IUser>;
+  public userInfo$: Observable<IUser> = this.store.pipe(select(selectUserInfo));
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     this.isAuthentificated = this.authService.isAuthentificated;
-    this.userInfo$ = this.authService.getUserInfo();
+    this.store.dispatch(AuthActions.loadUserInfo());
   }
 
   public logout(): void {

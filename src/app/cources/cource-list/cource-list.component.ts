@@ -1,41 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourceService } from '../services/cource.service';
 import { ICource } from '../models/icource';
 import { Observable, of, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, skipWhile, switchMap } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import * as CourceActions from '../store/cources.actions';
+import { selectCources } from '../store/cources.selectors';
 
 @Component({
   selector: 'app-cource-list',
   templateUrl: './cource-list.component.html',
   styleUrls: ['./cource-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourceListComponent implements OnInit {
-  public courceItems$: Observable<ICource[]>;
+  public courceItems$: Observable<ICource[]> = this.store.pipe(select(selectCources));
 
-  private searchText$: Subject<string> = new Subject<string>();
-  private courceItemsLength = 3;
-
-  constructor(private courceService: CourceService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private store: Store) { }
 
   ngOnInit(): void {
-    this.courceItems$ = this.courceService.get(this.courceItemsLength);
-    this.searchText$
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        filter(text => text.length === 0 || text.length > 3),
-        switchMap(text => this.courceService.get(3, text))
-      )
-      .subscribe(items => this.courceItems$ = of(items));
+    this.store.dispatch(CourceActions.loadCources());
   }
 
   public onCourceDelete(id: number): void {
     if (window.confirm('Do you really want to delete this cource?')) {
-      this.courceService.delete(id)
-        .subscribe(o => this.courceItems$ = this.courceService.get(this.courceItemsLength - 1));
+      this.store.dispatch(CourceActions.deleteCource({ id }));
     }
   }
 
@@ -44,11 +35,10 @@ export class CourceListComponent implements OnInit {
   }
 
   public loadMore(): void {
-    this.courceItemsLength = this.courceItemsLength + 3;
-    this.courceItems$ = this.courceService.get(this.courceItemsLength).pipe();
+    this.store.dispatch(CourceActions.loadMoreCources());
   }
 
   public onSearch(searchText: string): void {
-    this.searchText$.next(searchText);
+    this.store.dispatch(CourceActions.searchCources({ searchText }));
   }
 }

@@ -11,6 +11,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { LoaderInterceptor } from './core/loader/loader.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './core/store/auth.effects';
+import * as fromAuth from './core/store/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,11 @@ import { LoaderInterceptor } from './core/loader/loader.interceptor';
     BrowserAnimationsModule,
     LoginModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forRoot({auth: fromAuth.reducer}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([AuthEffects])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Cource } from '../models/cource';
 import { ICource } from '../models/icource';
 import { CourceService } from '../services/cource.service';
+import * as CourceActions from '../store/cources.actions';
 
 @Component({
   selector: 'app-cource-modify',
@@ -17,16 +19,17 @@ export class CourceModifyComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
+              private store: Store,
               private courceService: CourceService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.id = +params.id;
       if (this.id) {
+        this.isNew = false;
         this.courceService
           .getById(this.id)
           .subscribe(cource => this.cource = cource);
-        this.isNew = false;
       }
       else {
         this.isNew = true;
@@ -36,14 +39,10 @@ export class CourceModifyComponent implements OnInit {
 
   public save(): void {
     if (this.isNew) {
-      this.courceService
-        .add(this.cource)
-        .subscribe(o => this.router.navigate(['../']));
+      this.store.dispatch(CourceActions.addCource({ cource: this.cource }));
     }
     else {
-      this.courceService
-        .update(this.cource)
-        .subscribe(o => this.router.navigate(['../']));;
+      this.store.dispatch(CourceActions.updateCource({ cource: this.cource }));
     }
   }
 

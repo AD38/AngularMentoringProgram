@@ -1,4 +1,6 @@
-class User implements IUser {
+import { IUser } from './iuser';
+
+export class User implements IUser {
     id: number;
     token: string;
     name: {
