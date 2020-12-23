@@ -2,17 +2,21 @@
 <div class="login-page">
     <mat-card ngClass="login-page-content">
         <mat-card-title>Login</mat-card-title>
-        <form>
+        <form #form="ngForm" (ngSubmit)="login()">
             <mat-card-content>
                 <mat-form-field>
-                    <input type="text" [(ngModel)]="email" name="email" matInput required placeholder="E-mail">
+                    <input type="text" #emailField="ngModel" [(ngModel)]="email" name="email" matInput required
+                        placeholder="E-mail">
+                    <mat-error *ngIf="emailField.errors?.required">Field is required</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <input type="password" [(ngModel)]="password" name="password" matInput required placeholder="Password">
+                    <input type="password" #passwordField="ngModel" [(ngModel)]="password" name="password" matInput
+                        required placeholder="Password">
+                    <mat-error *ngIf="passwordField.errors?.required">Field is required</mat-error>
                 </mat-form-field>
             </mat-card-content>
             <mat-card-actions align="end">
-                <button type="submit" mat-button (click)="login()">Login</button>
+                <button type="submit" mat-button disabled]="form.invalid">Login</button>
             </mat-card-actions>
         </form>
     </mat-card>

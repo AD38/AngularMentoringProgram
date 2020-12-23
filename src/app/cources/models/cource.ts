@@ -1,4 +1,5 @@
-import { ICource } from "./icource";
+import { IAuthor } from "./iaouthor";
+import { ICource } from './icource';
 
 export class Cource implements ICource {
     id: number;
@@ -7,4 +8,5 @@ export class Cource implements ICource {
     duration: number;
     description: string;
     isTopRated: boolean;
+    authors: IAuthor[];
 }

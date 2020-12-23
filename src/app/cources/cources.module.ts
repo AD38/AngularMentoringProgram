@@ -5,12 +5,14 @@ import { CourceItemComponent } from './cource-item/cource-item.component';
 
 import { SectionComponent } from './section/section.component';
 import { CourceListComponent } from './cource-list/cource-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CourceBorderHighlightDirective } from './directives/cource-border-highlight.directive';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
@@ -22,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromCources from './store/reducers/cources.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CourcesEffects } from './store/cources.effects';
+import { AuthorsComponent } from './authors/authors.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { CourcesEffects } from './store/cources.effects';
     CourceBorderHighlightDirective,
     FilterPipe,
     OrderByPipe,
-    CourceModifyComponent
+    CourceModifyComponent,
+    AuthorsComponent
   ],
   exports: [CourcePageComponent],
   imports: [
@@ -43,6 +47,9 @@ import { CourcesEffects } from './store/cources.effects';
     MatCardModule,
     MatIconModule,
     MatInputModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
     RouterModule,
     CourcesRoutingModule,
     StoreModule.forFeature(fromCources.courcesFeatureKey, fromCources.reducer),

@@ -1,3 +1,5 @@
+import { IAuthor } from './iaouthor';
+
 export interface ICourceBE {
     id: number;
     name: string;
@@ -5,4 +7,5 @@ export interface ICourceBE {
     length: number;
     description: string;
     isTopRated: boolean;
+    authors: IAuthor[];
 }

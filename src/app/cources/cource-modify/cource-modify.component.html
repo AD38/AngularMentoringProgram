@@ -2,34 +2,44 @@
     <mat-card ngClass="cource-modify-content">
         <mat-card-title *ngIf="isNew">New cource</mat-card-title>
         <mat-card-title *ngIf="!isNew">Modify cource</mat-card-title>
-        <form>
+        <form #form="ngForm" (ngSubmit)="save()">
             <mat-card-content>
                 <mat-form-field>
-                    <input type="text" [(ngModel)]="cource.title" name="title" matInput required placeholder="Title">
+                    <input type="text" #title="ngModel" [(ngModel)]="cource.title" maxlength="50" name="title" matInput
+                        required placeholder="Title">
+                    <mat-error *ngIf="title.errors?.maxlength">Max length is 50</mat-error>
+                    <mat-error *ngIf="title.errors?.required">Field is required</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea type="text" [(ngModel)]="cource.description" name="description" matInput required
-                        placeholder="Description"></textarea>
+                    <textarea type="text" #description="ngModel" [(ngModel)]="cource.description" maxlength="500"
+                        name="description" matInput required placeholder="Description"></textarea>
+                    <mat-error *ngIf="description.errors?.maxlength">Max length is 50</mat-error>
+                    <mat-error *ngIf="description.errors?.required">Field is required</mat-error>
                 </mat-form-field>
-                <mat-form-field ngClass="width-30">
+                <app-date #date="ngModel" name="date" [(ngModel)]="cource.creationDate"></app-date>
+                <mat-error *ngIf="date.errors?.invalidFormat">Invalid date format (mm/dd/yyyy)</mat-error>
+                <!-- <mat-form-field ngClass="width-30">
                     <input type="date" [ngModel]="cource.creationDate | date:'yyyy-MM-dd'"
                         (ngModelChange)="cource.creationDate = $event" name="date" matInput required placeholder="Date">
-                </mat-form-field>
+                </mat-form-field> -->
                 <div ngClass="cource-create-duration">
-                    <mat-form-field ngClass="width-30">
+                    <!-- <mat-form-field ngClass="width-30">
                         <input type="number" [(ngModel)]="cource.duration" name="duration" matInput required
                             placeholder="Duration">
-                    </mat-form-field>
-                    <span>{{cource.duration < 60 
-                        ? (cource.duration * 60000 | date: 'm\'min\'':'UTC') 
-                        : (cource.duration * 60000 | date: 'H\'h\' m\'min\'':'UTC')}}
-                    </span>
+                    </mat-form-field> -->
+                    <app-duration #duration="ngModel" name="duration" [(ngModel)]="cource.duration"></app-duration>
+                    <mat-error *ngIf="duration.errors?.invalidFormat">Invalid duration format</mat-error>
+                    <span>{{cource.duration < 60 ? (cource.duration * 60000 | date: 'm\' min\'':'UTC') :
+                            (cource.duration * 60000 | date: 'H\' h\' m\'min\'':'UTC')}} </span>
                 </div>
-
+                <app-authors #authors="ngModel" [(ngModel)]="cource.authors" name="authors"
+                    [savedAuthors]="cource.authors" [allAuthors]="allAuthors$ | async"
+                    (modifyAuthorEvent)="cource.authors = $event;"></app-authors>
+                <mat-error *ngIf="authors.errors?.invalidLength">Should be at least one author</mat-error>
             </mat-card-content>
             <mat-card-actions align="end">
                 <button type="button" mat-flat-button (click)="cancel()">Cancel</button>
-                <button type="submit" color="primary" mat-flat-button (click)="save()">Save</button>
+                <button type="submit" color="primary" mat-flat-button [disabled]="form.invalid">Save</button>
             </mat-card-actions>
         </form>
     </mat-card>

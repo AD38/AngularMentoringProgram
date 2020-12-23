@@ -51,7 +51,8 @@ export class CourceService {
       description: cource.description,
       isTopRated: cource.isTopRated,
       length: cource.duration,
-      name: cource.title
+      name: cource.title,
+      authors: cource.authors
     };
   }
 
@@ -63,6 +64,7 @@ export class CourceService {
       duration: cource.length,
       description: cource.description,
       isTopRated: cource.isTopRated,
+      authors: cource.authors
     };
   }
 }
